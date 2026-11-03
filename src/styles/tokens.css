@@ -1,0 +1,91 @@
+/* Magmafy CRM · "Smart Feed" tokens.
+   One calm neutral ramp, ONE accent (ultraviolet), quiet semantic colours. Light is the default; dark is first-class
+   (data-theme='dark'). Legacy token names (--highlight, --active, --grad…) are kept so older screens inherit the new look. */
+:root, [data-theme='light'] {
+  --bg: #f4f4f7;
+  --card: #ffffff;
+  --card-2: #eeeef3;
+  --card-hover: #f8f8fb;
+  --sunken: #f1f1f5;
+  --line: #e4e4ec;
+  --line-2: #cfcfdb;
+  --ink: #101018;
+  --ink-2: #4a4a5a;
+  --ink-3: #686878;
+  --accent: #5436f0;
+  --accent-ink: #ffffff;
+  --accent-soft: rgba(84, 54, 240, .09);
+  --accent-line: rgba(84, 54, 240, .34);
+  --highlight: var(--accent);
+  --highlight-ink: var(--accent-ink);
+  --highlight-ink-2: rgba(255, 255, 255, .78);
+  --active: #101018;
+  --active-ink: #ffffff;
+  --good: #137a53; --good-soft: #e2f3ea;
+  --warn: #8f5a00; --warn-soft: #fbefd6;
+  --bad: #bd3326;  --bad-soft: #fbe5e1; --bad-solid: #bd3326;
+  --info: var(--accent); --info-soft: var(--accent-soft);
+  --cnt-ink: #ffffff;
+  --glass: rgba(244, 244, 247, .82);
+  --scrim: rgba(16, 16, 24, .36);
+  --shadow-pop: 0 18px 48px rgba(16, 16, 24, .16), 0 0 0 1px var(--line);
+  --shadow-row: 0 1px 0 var(--line);
+  --hatch: rgba(16, 16, 24, .05);
+  color-scheme: light;
+}
+[data-theme='dark'] {
+  --bg: #0b0b10;
+  --card: #131318;
+  --card-2: #1c1c24;
+  --card-hover: #181820;
+  --sunken: #0f0f14;
+  --line: rgba(255, 255, 255, .08);
+  --line-2: rgba(255, 255, 255, .17);
+  --ink: #f4f4f8;
+  --ink-2: #b6b6c4;
+  --ink-3: #8c8c9d;
+  --accent: #9b8dff;
+  --accent-ink: #0d0a22;
+  --accent-soft: rgba(155, 141, 255, .14);
+  --accent-line: rgba(155, 141, 255, .4);
+  --highlight-ink-2: rgba(13, 10, 34, .72);
+  --active: #f4f4f8;
+  --active-ink: #0b0b10;
+  --good: #4fcf9d; --good-soft: rgba(79, 207, 157, .13);
+  --warn: #f0b952; --warn-soft: rgba(240, 185, 82, .13);
+  --bad: #ff8077;  --bad-soft: rgba(255, 128, 119, .13); --bad-solid: #d2453a;
+  --cnt-ink: #0d0a22;
+  --glass: rgba(11, 11, 16, .8);
+  --scrim: rgba(0, 0, 0, .62);
+  --shadow-pop: 0 20px 56px rgba(0, 0, 0, .6), 0 0 0 1px var(--line-2);
+  --hatch: rgba(255, 255, 255, .05);
+  color-scheme: dark;
+}
+:root {
+  /* stage ramp: from a whisper of the accent to the full accent, then green for «client» */
+  --heat-0: color-mix(in srgb, var(--accent) 8%, var(--card-2));
+  --heat-1: color-mix(in srgb, var(--accent) 20%, var(--card-2));
+  --heat-2: color-mix(in srgb, var(--accent) 34%, var(--card-2));
+  --heat-3: color-mix(in srgb, var(--accent) 50%, var(--card-2));
+  --heat-4: color-mix(in srgb, var(--accent) 66%, var(--card-2));
+  --heat-5: color-mix(in srgb, var(--accent) 82%, var(--card-2));
+  --heat-6: var(--accent);
+  --heat-7: var(--good);
+  /* legacy brand tokens, flattened: no gradients in the new language */
+  --m-y: var(--warn); --m-o: var(--warn); --m-p: var(--accent); --m-v: var(--accent); --m-b: var(--accent);
+  --grad: linear-gradient(var(--accent), var(--accent));
+  --grad-btn: linear-gradient(var(--accent), var(--accent));
+  --grad-soft: linear-gradient(var(--accent-soft), var(--accent-soft));
+  --dot-1: var(--bad); --dot-2: var(--warn); --dot-3: color-mix(in srgb, var(--warn) 50%, var(--good)); --dot-4: color-mix(in srgb, var(--good) 70%, var(--ink-3)); --dot-5: var(--good);
+
+  /* type: El Messiri is the editorial voice (headings, group titles, names), Tajawal / Inter carry the interface */
+  --f-display: 'El Messiri', 'Tajawal', system-ui, sans-serif;
+  --f-display-ar: 'El Messiri', 'Tajawal', system-ui, sans-serif;
+  --f-body: 'Inter', 'Tajawal', system-ui, -apple-system, 'Segoe UI', Tahoma, sans-serif;
+  --f-num: 'Inter', 'Tajawal', system-ui, sans-serif;
+
+  --r-card: 16px; --r-l: 14px; --r-m: 12px; --r-s: 10px; --r-xs: 6px;
+  --ease: cubic-bezier(.22, .8, .24, 1);
+  --t-fast: 140ms; --t-med: 220ms; --t-slow: 360ms;
+  --header-h: 56px; --side-w: 64px; --side-w-open: 228px; --pane-w: 580px; --feed-w: 760px;
+}

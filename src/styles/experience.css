@@ -1,0 +1,104 @@
+/* Magmafy CRM: experience layer. Home «Do this now», quick capture, tour, mobile nav, a11y and touch rules.
+   Loaded after base.css. Uses the tokens in tokens.css only (no new hex colours except the dark dock). */
+
+/* ---------- global polish ---------- */
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.ibtn:focus-visible, .btn:focus-visible, .chip:focus-visible { outline-offset: 3px; border-radius: 999px; }
+.btn, .chip, .ibtn { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+[dir='rtl'] .arrow-btn svg { transform: scaleX(-1); }
+[dir='rtl'] .arrow-btn:hover svg { transform: scaleX(-1) rotate(-45deg); }
+.chip .n, .seg .n { opacity: .85; }
+.field__err { color: var(--bad); font-size: 12.5px; font-weight: 500; }
+.field--bad .input, .field--bad .select, .input[aria-invalid='true'] { border-color: var(--bad); box-shadow: 0 0 0 3px color-mix(in srgb, var(--bad) 18%, transparent); }
+.chip--lg { height: 48px; padding: 0 20px; font-size: 14.5px; }
+.empty__ic { display: inline-grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: var(--grad-soft); color: var(--ink); margin-bottom: 14px; }
+.empty__ic svg { width: 24px; height: 24px; }
+.callout { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: var(--r-m); background: var(--warn-soft); color: var(--ink); }
+.callout svg { width: 20px; height: 20px; color: var(--warn); flex: none; }
+.callout b { font-weight: 600; font-size: 14px; }
+.callout .faint { font-size: 12.5px; }
+.disclose { all: unset; box-sizing: border-box; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; font-size: 13.5px; color: var(--ink-2); min-height: 44px; }
+.disclose:hover { color: var(--ink); }
+.disclose:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 8px; }
+.disclose__ic { width: 16px; height: 16px; transition: transform var(--t-fast); }
+[dir='rtl'] .disclose__ic { transform: scaleX(-1); }
+.disclose[aria-expanded='true'] .disclose__ic { transform: rotate(90deg); }
+.modal__foot .grow { min-width: 0; }
+.cmdk__foot { display: flex; gap: 16px; padding: 10px 18px; border-top: 1px solid var(--line); font-size: 12px; color: var(--ink-3); }
+.cmdk__foot kbd { margin-inline-end: 3px; }
+.cmdk__item small { display: inline-flex; gap: 4px; }
+
+/* labelled action buttons (lead drawer) */
+.abtn { display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 16px; border-radius: 999px; border: 0; background: var(--card-2); color: var(--ink); font-size: 14px; font-weight: 500; cursor: pointer; white-space: nowrap; text-decoration: none; transition: background-color var(--t-fast), transform 80ms; }
+.abtn:hover { background: color-mix(in srgb, var(--card-2) 82%, var(--ink)); text-decoration: none; }
+.abtn:active { transform: scale(.97); }
+.abtn svg { width: 18px; height: 18px; }
+.abtn[disabled] { opacity: .4; pointer-events: none; }
+.stepper__track button { position: relative; height: 12px; }
+.stepper__track button::after { content: ''; position: absolute; inset: -16px 0; }
+
+/* ---------- tour + shortcuts ---------- */
+.tour { position: fixed; z-index: 62; top: 50%; left: 50%; translate: -50% -50%; width: min(520px, calc(100vw - 24px)); display: flex; flex-direction: column; gap: 18px; padding: 0 28px 24px; border-radius: 32px; background: var(--card); box-shadow: var(--shadow-pop); overflow: hidden; animation: pop var(--t-med) var(--ease); }
+.tour__art { display: grid; place-items: center; height: 168px; margin-inline: -28px; background: var(--grad-btn); background-image: radial-gradient(circle at 30% 20%, rgba(254, 218, 117, .55), transparent 55%), var(--grad-btn); }
+.tour__ic { display: grid; place-items: center; width: 88px; height: 88px; border-radius: 28px; background: rgba(255, 255, 255, .2); color: #fff; backdrop-filter: blur(6px); animation: pop 420ms var(--ease); }
+.tour__txt h2 { margin: 2px 0 8px; font-size: 24px; font-weight: 500; }
+.tour__txt p { margin: 0; color: var(--ink-2); line-height: 1.85; font-size: 15px; }
+.tour .onb__dots { align-self: center; }
+.tour .onb__dots i { width: 8px; }
+.tour .onb__dots i.on { width: 26px; }
+.tour__foot { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.keys { margin: 0; display: grid; gap: 4px; }
+.keys > div { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 10px 4px; border-bottom: 1px solid var(--line); }
+.keys dt { display: flex; gap: 6px; }
+.keys dd { margin: 0; color: var(--ink-2); }
+.keys kbd { font-size: 12.5px; padding: 3px 9px; }
+
+/* ---------- touch targets: 44px on coarse pointers ---------- */
+@media (pointer: coarse) {
+  .ibtn--sm, .ibtn--xs { width: 44px; height: 44px; }
+  .chip, .seg button { min-height: 44px; }
+  .btn--sm { height: 44px; }
+  .check { min-height: 44px; }
+  .check input { width: 24px; height: 24px; }
+  .menu__item { min-height: 44px; }
+  .tcard__status select { min-height: 44px; }
+  .tcard__status .ibtn { width: 44px; height: 44px; }
+  input.input, select.select, .select { min-height: 44px; }
+}
+
+/* ---------- motion that respects the user ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .now__row, .tour__ic, .fab { animation: none !important; transition: none !important; }
+}
+
+/* ---------- contacts: filters collapse on phones ---------- */
+.datef { display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--ink-2); }
+.datef .input { width: 150px; }
+.datef b { font-weight: 500; color: var(--ink); white-space: nowrap; }
+.btn .n { font: 700 11px var(--f-num); min-width: 20px; height: 20px; border-radius: 10px; background: var(--highlight); color: var(--highlight-ink); display: inline-grid; place-items: center; padding: 0 5px; }
+@media (max-width: 960px) {
+  .filters { display: none; }
+  .filters.is-open { display: flex; padding: 14px; border-radius: var(--r-l); background: var(--card); }
+  .filters .select, .filters .datef, .filters .datef .input { width: 100% !important; flex: 1 1 100%; }
+  .filters .datef { display: grid; grid-template-columns: 90px 1fr; }
+  .filters .datef b { grid-column: 2; }
+}
+
+/* ---------- pipeline on phones ---------- */
+.board[hidden] { display: none; }
+.stagetabs { display: flex; gap: 8px; overflow-x: auto; padding: 2px 2px 12px; scrollbar-width: none; scroll-snap-type: x proximity; }
+.stagetabs::-webkit-scrollbar { display: none; }
+.stagetab { flex: none; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line-2); background: transparent; color: var(--ink); font-size: 13.5px; white-space: nowrap; cursor: pointer; scroll-snap-align: start; }
+.stagetab i { width: 9px; height: 9px; border-radius: 3px; }
+.stagetab .n { font-size: 12px; opacity: .85; }
+.stagetab[aria-selected='true'] { background: var(--active); color: var(--active-ink); border-color: var(--active); }
+.mboard__sum { display: flex; align-items: baseline; gap: 10px; margin: 4px 2px 12px; }
+.mboard__sum b { font-size: 20px; font-weight: 500; }
+.mcard { background: var(--card); border-radius: var(--r-l); padding: 6px 6px 12px; }
+.mcard__main { all: unset; box-sizing: border-box; display: flex; flex-direction: column; gap: 8px; width: 100%; padding: 12px 12px 6px; cursor: pointer; border-radius: var(--r-l); }
+.mcard__main:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.mcard__main b { font-weight: 500; font-size: 16px; }
+.mcard__main small { color: var(--ink-3); font-size: 12.5px; }
+.mcard .v { font-weight: 600; font-size: 14px; }
+.mcard__acts { display: flex; gap: 8px; padding: 6px 12px 0; flex-wrap: wrap; }
+.menu__item .dot { width: 9px; height: 9px; border-radius: 3px; flex: none; }
